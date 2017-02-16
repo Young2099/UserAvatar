@@ -88,7 +88,7 @@ public class FileUtil {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(fileSrc, options);
-        options.inSampleSize = calculateInSampleSize(options, 480, 800);
+        options.inSampleSize = calculateInSampleSize(options, 960, 1280);
         Log.i(TAG, "options.inSampleSize-->" + options.inSampleSize);
         options.inJustDecodeBounds = false;
         Bitmap img = BitmapFactory.decodeFile(fileSrc, options);
@@ -129,7 +129,7 @@ public class FileUtil {
      */
     public static boolean saveBitmap2File(Bitmap bmp, String filename) {
         Bitmap.CompressFormat format = Bitmap.CompressFormat.PNG;
-        int quality = 100;//压缩50% 100表示不压缩
+        int quality = 50;//压缩50% 100表示不压缩
         OutputStream stream = null;
         try {
             stream = new FileOutputStream(filename);
