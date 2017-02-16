@@ -9,6 +9,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by yf on 2016/2/23.
@@ -68,6 +71,22 @@ public class CropUtils {
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
+        } else {
+            String uriStr = uri.toString();
+            String path = uriStr.substring(10, uriStr.length());
+            if (path.startsWith("com.sec.android.gallery3d")) {
+                Log.e(TAG, "It's auto backup pic path:" + uri.toString());
+                return null;
+            }
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = context.getContentResolver().query(uri, filePathColumn, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            return picturePath;
         }
 
         return null;
@@ -125,6 +144,5 @@ public class CropUtils {
     private static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
-
 
 }
