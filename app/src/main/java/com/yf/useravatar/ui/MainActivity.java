@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void compressAndUploadAvatar(String fileSrc) {
-        //// TODO: 2017/2/16  压缩后，图片很不清晰，有待重改,项目需要上传，必须压缩...
         final File cover = FileUtil.getSmallBitmap(this, fileSrc);
 //        String mimeType = "image/*";
 //        requestBody = RequestBody.create(MediaType.parse(mimeType), file);
@@ -172,8 +171,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("crop", "true");// crop=true 有这句才能出来最后的裁剪页面.
         intent.putExtra("aspectX", 1);// 这两项为裁剪框的比例.
         intent.putExtra("aspectY", 1);// x:y=1:1
-        intent.putExtra("outputX", 100);//图片输出大小
-        intent.putExtra("outputY", 100);
+//        intent.putExtra("outputX", 400);//图片输出大小
+//        intent.putExtra("outputY", 400);
         intent.putExtra("output", Uri.fromFile(file));
         intent.putExtra("outputFormat", "JPEG");// 返回格式
         startActivityForResult(intent, REQUEST_CODE_CROUP_PHOTO);

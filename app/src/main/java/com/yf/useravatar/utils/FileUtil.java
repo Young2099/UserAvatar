@@ -88,7 +88,7 @@ public class FileUtil {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(fileSrc, options);
-        options.inSampleSize = calculateInSampleSize(options, 960, 1280);
+        options.inSampleSize = calculateInSampleSize(options, 480, 800);
         Log.i(TAG, "options.inSampleSize-->" + options.inSampleSize);
         options.inJustDecodeBounds = false;
         Bitmap img = BitmapFactory.decodeFile(fileSrc, options);
@@ -96,7 +96,6 @@ public class FileUtil {
         String filename = context.getFilesDir() + File.separator + "video-" + img.hashCode() + ".jpg";
         saveBitmap2File(img, filename);
         return new File(filename);
-
     }
 
     /**
@@ -128,7 +127,7 @@ public class FileUtil {
      * @return
      */
     public static boolean saveBitmap2File(Bitmap bmp, String filename) {
-        Bitmap.CompressFormat format = Bitmap.CompressFormat.PNG;
+        Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;
         int quality = 50;//压缩50% 100表示不压缩
         OutputStream stream = null;
         try {
